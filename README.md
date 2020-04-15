@@ -5,7 +5,7 @@ Code is currently a "rough draft", but functional enough for basic use.
 
 ## Programming your MicroBit
 
-Use the MakeCode editor to download a .hex file and put it on your microbit: https://makecode.microbit.org/_RaALAaEPtPK4
+Use the MakeCode editor to download a .hex file (of the code in the link) and put it on your microbit: https://makecode.microbit.org/_RaALAaEPtPK4
 
 This program listens on the USB serial port and the radio. If it receives a message on the serial port it forwards it
 to the radio, so you can have multiple MicroBits displaying the same status as long as one of them is plugged into
