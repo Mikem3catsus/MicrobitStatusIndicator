@@ -17,6 +17,8 @@ Holding the "B" button on the serial-connected MicroBit will display the number 
 
 ## Running the Python status update script
 
+Currently you'll need to do `python -m pip install pyserial` to pick up the serial module.
+
 Generally, just run it and it launches a small window:
 
 When in "Manual" mode, the "Busy" and "Free" buttons control the display on the MicroBits.
