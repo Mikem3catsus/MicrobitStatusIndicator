@@ -1,5 +1,5 @@
 # MicrobitStatusIndicator
-Code to use one (or more) Micro:Bit controllers to provide a visual indicator of your "free/busy" status.
+Use one or more Micro:Bit controllers (<https://microbit.org/>) to provide a visual indicator of your "free/busy" status.
 
 Code is currently a "rough draft", but functional enough for basic use.
 
