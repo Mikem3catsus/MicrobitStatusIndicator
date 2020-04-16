@@ -18,6 +18,7 @@ class Application(tk.Frame):
         self.root=master
         self.port_names = self.get_port_names()
         self.port = self.port_names[-1]
+        self.update_methods = {"Manual":self.update_manual, "Powershell Lync2013":self.update_powershell_lync2013}
         self.create_buttons()
         self.update()
 
@@ -37,7 +38,7 @@ class Application(tk.Frame):
         free_button = tk.Button(self, text="Free", command=self.send_clear)
         free_button.pack(side="left", expand=1, fill="both")
 
-        self.update_select = ttk.Combobox(values=["Manual", "Powershell_Lync2013"])
+        self.update_select = ttk.Combobox(values=list(self.update_methods.keys()))
         self.update_select.pack(side="bottom", expand=1, fill="both")
         self.update_select.set("Manual")
 
@@ -64,11 +65,11 @@ class Application(tk.Frame):
 
     def update(self):
         update_method = self.update_select.get()
-        if update_method == "Manual":
-            self.error_label["text"] = "Running fine..."
-        elif update_method == "Powershell_Lync2013":
-            self.update_powershell_lync2013()
+        self.update_methods[update_method]()
         self.root.after(1000*30, self.update)
+
+    def update_manual(self):
+        self.error_label["text"] = "Running fine..."
 
     def update_powershell_lync2013(self):
         """
@@ -95,6 +96,7 @@ class Application(tk.Frame):
             self.send_busy()
         else:
             self.send_clear()
+
 
 if __name__ == "__main__":
     launch_gui()
