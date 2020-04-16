@@ -14,7 +14,8 @@ def launch_gui():
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
-        self.pack()
+
+        master.title("Call Status")
         self.root=master
         self.port_names = self.get_port_names()
         self.port = self.port_names[-1]
@@ -26,25 +27,38 @@ class Application(tk.Frame):
         return [port.device for port in port_list.comports()]
 
     def create_buttons(self):
-        # we make the title label wide so that the window title bar is wide enough to grab for moving.
-        self.title_label = tk.Label(self, text="                  Micro:Bit Call Status Indicator                   ")
-        self.title_label.pack(side="top")
-        self.status_label = tk.Label(self, text="Status = Unknown")
-        self.status_label.pack(side="top")
-        self.error_label = tk.Label(self, text="Running fine...")
-        self.error_label.pack(side="top")
-        busy_button = tk.Button(self, text="Busy", command=self.send_busy)
-        busy_button.pack(side="left", expand=1, fill="both")
-        free_button = tk.Button(self, text="Free", command=self.send_clear)
-        free_button.pack(side="left", expand=1, fill="both")
+        full_sticky = tk.W + tk.E + tk.N + tk.S
 
-        self.update_select = ttk.Combobox(values=list(self.update_methods.keys()))
-        self.update_select.pack(side="bottom", expand=1, fill="both")
+        # we make the title label wide so that the window title bar is wide enough to grab for moving.
+        title_label = tk.Label(self.root, text="                  Micro:Bit Call Status Indicator                   ")
+        title_label.grid(column=0, row=1, columnspan=2)
+        self.status_label = tk.Label(self.root, text="Status = Unknown")
+        self.status_label.grid(column=0, row=2, columnspan=2)
+        self.error_label = tk.Label(self.root, text="Running fine...")
+        self.error_label.grid(column=0, row=3, columnspan=2)
+        busy_button = tk.Button(self.root, text="Busy", command=self.send_busy)
+        busy_button.grid(column=0, row=4, sticky=full_sticky)
+        free_button = tk.Button(self.root, text="Free", command=self.send_clear)
+        free_button.grid(column=1, row=4, sticky=full_sticky)
+
+        tk.Label(self.root, text="Update Method:").grid(column=0, row=5)
+        self.update_select = ttk.Combobox(self.root, values=list(self.update_methods.keys()))
+        self.update_select.grid(column=1, row=5, sticky= full_sticky)
         self.update_select.set("Manual")
 
-        self.comport_select = ttk.Combobox(values=self.port_names)
-        self.comport_select.pack(side="bottom", expand=1, fill="both")
+        tk.Label(self.root, text="Port for MicroBit:").grid(column=0, row=6)
+        self.comport_select = ttk.Combobox(self.root, values=self.port_names)
+        self.comport_select.grid(column=1, row=6, sticky=full_sticky)
         self.comport_select.set(self.port)
+
+        self.set_grid_weights()
+
+    def set_grid_weights(self):
+        (column_count, row_count) = self.root.grid_size()
+        for column in range(column_count):
+            self.root.grid_columnconfigure(column, weight=1)
+        for row in range(row_count):
+            self.root.grid_rowconfigure(row, weight=1)
 
     def send_busy(self):
         self.status_label["text"] = "Status = Busy"
