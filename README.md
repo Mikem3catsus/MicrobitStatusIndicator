@@ -27,6 +27,15 @@ Currently you'll need to do `python -m pip install pyserial` to pick up the seri
 
 Generally, just run it and it launches a small window:
 
-When in "Manual" mode, the "Busy" and "Free" buttons control the display on the MicroBits.
+![](docs/tk_window_screenshot.png)
+
+When the `Update Method` is set to `Manual` mode, the `Busy` and `Free` buttons control the display on the MicroBits.
 When another update method is selected, the script polls on that method every 30 seconds and makes an update.
-The serial port ("COM") is selectable as well.
+
+The serial port ("COM") is selectable as well. It defaults to the highest COM port because that is what works best on my system.
+
+To use the `Powershell Lync2013` method to automatically set the status if you are on a call using Lync 2013, Lync 2016 or Skype for Business, you will need to follow these extra instructions as described on these web pages:
+
+* https://blog.jongallant.com/2016/08/solution-lync-2013-not-found/
+* https://stackoverflow.com/questions/56286156/lync-model-reference-for-skype-for-business-2016-online-status?noredirect=1&lq=1
+
