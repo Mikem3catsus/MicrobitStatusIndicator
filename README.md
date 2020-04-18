@@ -5,6 +5,12 @@ Code is currently a "rough draft", but functional enough for basic use.
 
 I would also welcome other contributors to this project - even if it's just filing issues :-)
 
+The end result is being able to use an inexpensive microbit as a call indicator, either connected directly to your PC or... wirelessly
+
+![Busy shows a lightly pulsing "X"](docs/microbit_busy.png) ![Free shows a spinning "circle"](docs/microbit_free.png)
+
+I've been getting my MicroBits from Sparkfun, mostly because they are still shipping and have the lowest prices: <https://www.sparkfun.com/products/14208>
+
 ## Programming your MicroBit
 
 Plug in your microbit and copy the `microbit-StatusIndicator.hex` file to the microbit.
